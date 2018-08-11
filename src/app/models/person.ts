@@ -1,6 +1,6 @@
 export interface Person {
     name: string;
     height: string;
-    homeWorld: string;
+    homeworld: string;
     url: string;
 }

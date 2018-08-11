@@ -9,8 +9,13 @@
           </mat-card-title>
           <mat-card-content>
             <mat-list>
-              <mat-list-item>Height: {{person.height}} <span *ngIf="person.height !== 'unknown'">CM</span></mat-list-item>
-              <mat-list-item>Home World: {{person.homeWorld}}</mat-list-item>
+              <mat-list-item>Height: {{person.height}} <span *ngIf="person.height !== 'unknown'"> CM</span></mat-list-item>
+              <!-- <mat-list-item>Home World: {{person.homeworld}}</mat-list-item> -->
+              <mat-list-item>
+                  <mat-card-actions>
+                      <a mat-raised-button href="{{person.homeworld}}" target="_blank">Home World</a>
+                    </mat-card-actions>
+              </mat-list-item>
             </mat-list>
           </mat-card-content>
           <mat-card-actions>

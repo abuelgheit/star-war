@@ -1,0 +1,22 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-4 mb-5" *ngFor="let person of results">
+        <!-- <mat-card>{{person.name}}</mat-card> -->
+        <mat-card>
+          <mat-card-title>
+            <mat-card-header>{{person.name}}</mat-card-header>
+          </mat-card-title>
+          <mat-card-content>
+            <mat-list>
+              <mat-list-item>Height: {{person.height}} <span *ngIf="person.height !== 'unknown'">CM</span></mat-list-item>
+              <mat-list-item>Home World: {{person.homeWorld}}</mat-list-item>
+            </mat-list>
+          </mat-card-content>
+          <mat-card-actions>
+            <a mat-raised-button href="{{person.url}}" target="_blank">Link</a>
+          </mat-card-actions>
+        </mat-card>
+    </div>
+  </div>
+</div>

@@ -5,3 +5,5 @@
   npm install
   ng serve -o
  ```
+
+ ## the project use ngrx

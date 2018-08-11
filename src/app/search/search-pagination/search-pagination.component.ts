@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PageEvent } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
@@ -13,36 +13,41 @@ import * as PeopleActions from '../../ngrx/people.actions';
   templateUrl: './search-pagination.component.html',
   styleUrls: ['./search-pagination.component.css']
 })
-export class SearchPaginationComponent implements OnInit {
+export class SearchPaginationComponent implements OnInit, OnDestroy {
 
   searchRes: Observable<SearchResponse>
-  length = 100;
+  length = 0;
   pageSize = 10;
   pageSizeOptions: number[] = [10];
   subscription: Subscription;
   next: string;
   previous: string;
   
-  constructor(
+  constructor (
     private store: Store<AppState>,
     private peopleService: PeopleService,
   ) {
     this.searchRes = store.select('people');
     this.searchRes.subscribe(
       res => {
-       this.length = res.count;
-       this.next = res.next;
-       this.previous = res.previous;
-       console.log(this.previous);
+        if (res) {
+          this.length = res.count;
+          this.next = res.next;
+          this.previous = res.previous;
+        }
       }
     );
 
   }
 
-  ngOnInit() {
+  ngOnInit () {
   }
 
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
+  ngOnDestroy () {
+    this.subscription.unsubscribe();
+  }
+
+  setPageSizeOptions (setPageSizeOptionsInput: string) {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
@@ -54,7 +59,6 @@ export class SearchPaginationComponent implements OnInit {
         }
       );
     } else if (event.pageIndex < event.previousPageIndex) {
-      console.log(this.previous);
       this.subscription = this.peopleService.searchPeople(this.previous.split('=')[1] + '=' + this.previous.split('=')[2]).subscribe(
         res => {
           this.store.dispatch(new PeopleActions.SetPeople(res));

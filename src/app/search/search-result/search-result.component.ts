@@ -1,6 +1,6 @@
 import { AppState } from './../../app.state';
 import { SearchResponse } from './../../models/searchRes';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Person } from '../../models/person';
@@ -22,13 +22,14 @@ export class SearchResultComponent implements OnInit {
     this.people = store.select('people');
     this.people.subscribe(
       res => {
-        this.count = res.count;
-        this.results = res.results;
+        if (res) {
+          this.count = res.count;
+          this.results = res.results;
+        }
       }
     );
   }
 
   ngOnInit() {
   }
-
 }

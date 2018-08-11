@@ -4,6 +4,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Person } from '../../models/person';
+import { DndDropEvent } from 'ngx-drag-drop';
 
 @Component({
   selector: 'app-search-result',
@@ -15,6 +16,16 @@ export class SearchResultComponent implements OnInit {
   people: Observable<SearchResponse>;
   count: number;
   results: Person[];
+
+  draggable = {
+    data: "myDragData",
+    effectAllowed: "move",
+    disable: false,
+    handle: false
+  };
+
+  first: number;
+  second: number;
 
   constructor(
     private store: Store<AppState>,
@@ -30,6 +41,21 @@ export class SearchResultComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  
+  onDraggableMoved(event) {
+    this.first = event;
+    if (this.first > this.second) {
+      this.results.splice(this.second, 0, this.results[this.first]);
+      this.results.splice(this.first+1, 1);
+    } else {
+      this.results.splice(this.second+1, 0, this.results[this.first]);
+      this.results.splice(this.first, 1);
+    }
+  }
+      
+  onDrop(event) {
+    this.second = event;
   }
 }

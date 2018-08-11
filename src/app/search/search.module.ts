@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule, MatInputModule, MatIconModule, MatCardModule, MatListModule, MatPaginatorModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SearchPaginationComponent } from './search-pagination/search-pagination.component';
+import { DndModule } from 'ngx-drag-drop';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { SearchPaginationComponent } from './search-pagination/search-pagination
     MatCardModule,
     MatListModule,
     MatPaginatorModule,
+    DndModule,
   ],
   declarations: [
    SearchComponent,

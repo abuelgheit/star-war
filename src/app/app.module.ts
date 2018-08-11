@@ -1,3 +1,4 @@
+import { DndModule } from 'ngx-drag-drop';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchModule } from './search/search.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,6 +31,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatCardModule,
     MatListModule,
     MatPaginatorModule,
+    DndModule,
     StoreModule.forRoot({ people: peopleReducer }),
     SearchModule,
   ],

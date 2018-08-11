@@ -1,25 +1,30 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-4 mb-5" *ngFor="let person of results">
+    <div class="col-4 mb-5" *ngFor="let person of results; let i = index"
+     [dndDraggable]="draggable?.data"
+     [dndEffectAllowed]="draggable?.effectAllowed"
+     [dndDisableIf]="draggable?.disable"
+     (dndMoved)="onDraggableMoved(i)"
+     (dndDrop)="onDrop(i)" dndDropzone>
         <!-- <mat-card>{{person.name}}</mat-card> -->
-        <mat-card>
+        <mat-card dndHandle>
           <mat-card-title>
-            <mat-card-header>{{person.name}}</mat-card-header>
+            <mat-card-header>{{person?.name}}</mat-card-header>
           </mat-card-title>
           <mat-card-content>
             <mat-list>
-              <mat-list-item>Height: {{person.height}} <span *ngIf="person.height !== 'unknown'"> CM</span></mat-list-item>
+              <mat-list-item>Height: {{person?.height}} <span *ngIf="person?.height !== 'unknown'"> CM</span></mat-list-item>
               <!-- <mat-list-item>Home World: {{person.homeworld}}</mat-list-item> -->
               <mat-list-item>
                   <mat-card-actions>
-                      <a mat-raised-button href="{{person.homeworld}}" target="_blank">Home World</a>
+                      <a mat-raised-button href="{{person?.homeworld}}" target="_blank">Home World</a>
                     </mat-card-actions>
               </mat-list-item>
             </mat-list>
           </mat-card-content>
           <mat-card-actions>
-            <a mat-raised-button href="{{person.url}}" target="_blank">Link</a>
+            <a mat-raised-button href="{{person?.url}}" target="_blank">Link</a>
           </mat-card-actions>
         </mat-card>
     </div>

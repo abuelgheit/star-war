@@ -6,4 +6,12 @@
   ng serve -o
  ```
 
- ## the project use ngrx
+ ### the project uses
+ ```
+   RXJS
+   ngrx
+   ngx-drag-drop
+  ```
+  
+  
+    
